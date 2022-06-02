@@ -14,6 +14,7 @@ class AuthViewModel: ObservableObject {
     /*
      @Published 이므로 userSession을 사용하는 모든 view에 변경된 값을 전달함. (ContentView .. 에 전달.)
      */
+    @Published var didAuthenticateUser = false
     
     init() {
         self.userSession = Auth.auth().currentUser // currentUser logged in ? store it in userSession :
@@ -42,7 +43,7 @@ class AuthViewModel: ObservableObject {
             }
             
             guard let user = result?.user else { return }
-            self.userSession = user
+            //self.userSession = user
             
             print("DEBUG: Registerd user successfully")
             print("DEBUG: User is \(self.userSession)")
@@ -55,7 +56,7 @@ class AuthViewModel: ObservableObject {
             Firestore.firestore().collection("users")
                 .document(user.uid)
                 .setData(data) { _ in
-                    print("DEBUG: Did upload user data..")
+                    self.didAuthenticateUser = true
                 }
         }
     }

@@ -19,7 +19,8 @@ struct TwiterSwiftUIApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                ContentView()
+//                ContentView()
+                ProfilePhotoSelectorView()
             }
             .environmentObject(viewModel) // contentView에 environmentObject인 viewModel을 넘겨줌.
         }
